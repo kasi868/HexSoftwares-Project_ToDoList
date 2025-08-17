@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complete Todo App with Celebration Animation</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>TO DO LIST</h1>
+    <div class="header-controls">
+      <button onclick="toggleDarkMode()" id="themeToggle">🌙 Dark Mode</button>
+      <div id="clock">🕒 00:00:00</div>
+    </div>
+  </header>
+
+  <div class="add-task">
+    <input type="text" id="taskName" placeholder="Task name" />
+    <input type="date" id="taskDue" />
+    <select id="taskPriority">
+      <option value="High">High Priority</option>
+      <option value="Medium">Medium Priority</option>
+      <option value="Low">Low Priority</option>
+    </select>
+    <select id="taskCategory">
+      <option value="Work">Work</option>
+      <option value="Personal">Personal</option>
+      <option value="Health">Health</option>
+      <option value="Study">Study</option>
+    </select>
+    <button onclick="addTask()">➕ Add Task</button>
+  </div>
+
+  <main>
+    <div class="left-column">
+      <section class="controls">
+        <div class="filter">
+          <span class="control-label">🔍 Filter by:</span>
+          <button onclick="setFilter('all')" class="filter-btn active" data-filter="all">All</button>
+          <button onclick="setFilter('today')" class="filter-btn" data-filter="today">Today</button>
+          <button onclick="setFilter('this-week')" class="filter-btn" data-filter="this-week">This Week</button>
+          <button onclick="setFilter('overdue')" class="filter-btn" data-filter="overdue">Overdue</button>
+        </div>
+        <div class="sort">
+          <label for="sortSelect" class="control-label">📊 Sort by:</label>
+          <select id="sortSelect" onchange="setSort(this.value)">
+            <option value="priority">Priority</option>
+            <option value="due-date">Due Date</option>
+            <option value="category">Category</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="task-list" id="taskList">
+        <div class="empty-state" id="emptyState">
+          <div class="empty-icon">📋</div>
+          <p>No tasks found</p>
+          <small>Add a task to get started!</small>
+        </div>
+      </section>
+    </div>
+
+    <div class="right-column">
+      <div class="summary-card">
+        <h2>📈 Task Summary</h2>
+        <canvas id="taskChart"></canvas>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number" id="pendingCount">0</div>
+            <div class="stat-label">Pending</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" id="overdueCount">0</div>
+            <div class="stat-label">Overdue</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" id="completedCount">0</div>
+            <div class="stat-label">Completed</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pomodoro-card">
+        <h2>🍅 Pomodoro Timer</h2>
+        <div id="timer">25:00</div>
+        <div class="timer-controls">
+          <button onclick="startPomodoro()" id="startBtn">▶️ Start</button>
+          <button onclick="resetPomodoro()">🔄 Reset</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Confetti Container -->
+  <div id="confetti-container"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="confetti.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
